@@ -4,9 +4,9 @@
 
 
 ## 1. The dataset
-<p>Walt Disney Studios is the foundation on which The Walt Disney Company was built. The Studios has produced more than 600 films since their debut film,  Snow White and the Seven Dwarfs in 1937. While many of its films were big hits, some of them were not. In this notebook, we will explore a dataset of Disney movies and analyze what contributes to the success of Disney movies.</p>
+<p>Walt Disney Studios is the foundation on which The Walt Disney Company was built. The Studios has produced more than 600 films since their debut film,  Snow White and the Seven Dwarfs in 1937. While many of its films were big hits, some of them were not. In this notebook, I will explore a dataset of Disney movies and analyze what contributes to the success of Disney movies.</p>
 <p><img src="https://assets.datacamp.com/production/project_740/img/jorge-martinez-instagram-jmartinezz9-431078-unsplash_edited.jpg" alt></p>
-<p>First, we will take a look at the Disney data compiled by <a href="https://data.world/kgarrett/disney-character-success-00-16">Kelly Garrett</a>. The data contains 579 Disney movies with six features: movie title, release date, genre, MPAA rating, total gross, and inflation-adjusted gross. </p>
+<p>First, I will take a look at the Disney data compiled by <a href="https://data.world/kgarrett/disney-character-success-00-16">Kelly Garrett</a>. The data contains 579 Disney movies with six features: movie title, release date, genre, MPAA rating, total gross, and inflation-adjusted gross. </p>
 
 ```
 # Import pandas library
@@ -22,7 +22,7 @@ gross.head()
 <img width="651" alt="Screen Shot 2023-04-08 at 21 37 04" src="https://user-images.githubusercontent.com/86967515/230751302-95545978-fa05-476c-9580-7577145b4843.png">
 
 ## 2. Top ten movies at the box office
-<p>Let's started by exploring the data. We will check which are the 10 Disney movies that have earned the most at the box office. We can do this by sorting movies by their inflation-adjusted gross (we will call it adjusted gross from this point onward). </p>
+<p>Let's started by exploring the data. I will check which are the 10 Disney movies that have earned the most at the box office. We can do this by sorting movies by their inflation-adjusted gross (we will call it adjusted gross from this point onward). </p>
 
 ```
 # Sort data by the adjusted gross in descending order 
@@ -34,7 +34,7 @@ inflation_adjusted_gross_desc.head(10)
 <img width="651" alt="Screen Shot 2023-04-08 at 21 37 39" src="https://user-images.githubusercontent.com/86967515/230751311-ace84bbf-7ad8-4c92-84d9-b2214e392b1c.png">
 
 ## 3. Movie genre trend
-<p>From the top 10 movies above, it seems that some genres are more popular than others. So, we will check which genres are growing stronger in popularity. To do this, we will group movies by genre and then by year to see the adjusted gross of each genre in each year.</p>
+<p>From the top 10 movies above, it seems that some genres are more popular than others. So, I will check which genres are growing stronger in popularity. To do this, I will group movies by genre and then by year to see the adjusted gross of each genre in each year.</p>
 
 ```
  # Extract year from release_date and store it in a new column
@@ -52,7 +52,7 @@ genre_yearly.head(10)
 <img width="651" alt="Screen Shot 2023-04-08 at 21 38 05" src="https://user-images.githubusercontent.com/86967515/230751316-b684f41c-7ab6-474c-b6b2-c67ceaf1bee3.png">
 
 ## 4. Visualize the genre popularity trend
-<p>We will make a plot out of these means of groups to better see how box office revenues have changed over time.</p>
+<p>I will make a plot out of these means of groups to better see how box office revenues have changed over time.</p>
 
 ```
 # Import seaborn library
@@ -64,9 +64,9 @@ sns.relplot(x='release_year', y='inflation_adjusted_gross', kind='line', hue='ge
 <img width="539" alt="Screen Shot 2023-04-08 at 21 38 23" src="https://user-images.githubusercontent.com/86967515/230751324-e1fe9005-e2f9-4c7e-b78a-930a81b516f8.png">
 
 ## 5. Data transformation
-<p>The line plot supports our belief that some genres are growing faster in popularity than others. For Disney movies, Action and Adventure genres are growing the fastest. Next, we will build a linear regression model to understand the relationship between genre and box office gross. </p>
-<p>Since linear regression requires numerical variables and the genre variable is a categorical variable, we'll use a technique called one-hot encoding to convert the categorical variables to numerical. This technique transforms each category value into a new column and assigns a 1 or 0 to the column. </p>
-<p>For this dataset, there will be 11 dummy variables, one for each genre except the action genre which we will use as a baseline. For example, if a movie is an adventure movie, like The Lion King, the adventure variable will be 1 and other dummy variables will be 0. Since the action genre is our baseline, if a movie is an action movie, such as The Avengers, all dummy variables will be 0.</p>
+<p>The line plot supports the belief that some genres are growing faster in popularity than others. For Disney movies, Action and Adventure genres are growing the fastest. Next, I will build a linear regression model to understand the relationship between genre and box office gross. </p>
+<p>Since linear regression requires numerical variables and the genre variable is a categorical variable, I'll use a technique called one-hot encoding to convert the categorical variables to numerical. This technique transforms each category value into a new column and assigns a 1 or 0 to the column. </p>
+<p>For this dataset, there will be 11 dummy variables, one for each genre except the action genre which I will use as a baseline. For example, if a movie is an adventure movie, like The Lion King, the adventure variable will be 1 and other dummy variables will be 0. Since the action genre is my baseline, if a movie is an action movie, such as The Avengers, all dummy variables will be 0.</p>
 
 ```
 # Convert genre variable to dummy variables 
@@ -77,8 +77,8 @@ genre_dummies.head()
 ```
 
 ## 6. The genre effect
-<p>Now that we have dummy variables, we can build a linear regression model to predict the adjusted gross using these dummy variables.</p>
-<p>From the regression model, we can check the effect of each genre by looking at its coefficient given in units of box office gross dollars. We will focus on the impact of action and adventure genres here. (Note that the intercept and the first coefficient values represent the effect of action and adventure genres respectively). We expect that movies like the Lion King or Star Wars would perform better for box office.</p>
+<p>Now that I have dummy variables, I can build a linear regression model to predict the adjusted gross using these dummy variables.</p>
+<p>From the regression model, I can check the effect of each genre by looking at its coefficient given in units of box office gross dollars. I will focus on the impact of action and adventure genres here. (Note that the intercept and the first coefficient values represent the effect of action and adventure genres respectively). I expect that movies like the Lion King or Star Wars would perform better for box office.</p>
 
 ```
 # Import LinearRegression
@@ -100,8 +100,8 @@ print((action, adventure))
 <img width="349" alt="Screen Shot 2023-04-08 at 21 39 25" src="https://user-images.githubusercontent.com/86967515/230751327-059c5fd0-7f15-46d1-9916-77757f920387.png">
 
 ## 7. Confidence intervals for regression parameters  (i)
-<p>Next, we will compute 95% confidence intervals for the intercept and coefficients. The 95% confidence intervals for the intercept  <b><i>a</i></b> and coefficient <b><i>b<sub>i</sub></i></b> means that the intervals have a probability of 95% to contain the true value <b><i>a</i></b> and coefficient <b><i>b<sub>i</sub></i></b> respectively. If there is a significant relationship between a given genre and the adjusted gross, the confidence interval of its coefficient should exclude 0.      </p>
-<p>We will calculate the confidence intervals using the pairs bootstrap method. </p>
+<p>Next, I will compute 95% confidence intervals for the intercept and coefficients. The 95% confidence intervals for the intercept  <b><i>a</i></b> and coefficient <b><i>b<sub>i</sub></i></b> means that the intervals have a probability of 95% to contain the true value <b><i>a</i></b> and coefficient <b><i>b<sub>i</sub></i></b> respectively. If there is a significant relationship between a given genre and the adjusted gross, the confidence interval of its coefficient should exclude 0.      </p>
+<p>I will calculate the confidence intervals using the pairs bootstrap method. </p>
 
 ```
 # Import a module
@@ -117,7 +117,7 @@ bs_adventure_reps =  np.empty(size)
 ```
 
 ## 8. Confidence intervals for regression parameters  (ii)
-<p>After the initialization, we will perform pair bootstrap estimates for the regression parameters. Note that we will draw a sample from a set of (genre, adjusted gross) data where the genre is the original genre variable. We will perform one-hot encoding after that. </p>
+<p>After the initialization, I will perform pair bootstrap estimates for the regression parameters. Note that I will draw a sample from a set of (genre, adjusted gross) data where the genre is the original genre variable. I will perform one-hot encoding after that. </p>
 
 
 ```
@@ -143,7 +143,7 @@ for i in range(size):
 ```
 
 ## 9. Confidence intervals for regression parameters (iii)
-<p>Finally, we compute 95% confidence intervals for the intercept and coefficient and examine if they exclude 0. If one of them (or both) does, then it is unlikely that the value is 0 and we can conclude that there is a significant relationship between that genre and the adjusted gross. </p>
+<p>Finally, I compute 95% confidence intervals for the intercept and coefficient and examine if they exclude 0. If one of them (or both) does, then it is unlikely that the value is 0 and we can conclude that there is a significant relationship between that genre and the adjusted gross. </p>
 
 ```
 # Compute 95% confidence intervals for intercept and coefficient values
