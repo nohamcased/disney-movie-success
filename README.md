@@ -19,6 +19,8 @@ gross = pd.read_csv("datasets/disney_movies_total_gross.csv", parse_dates=["rele
 gross.head()
 ```
 
+<img width="651" alt="Screen Shot 2023-04-08 at 21 37 04" src="https://user-images.githubusercontent.com/86967515/230751302-95545978-fa05-476c-9580-7577145b4843.png">
+
 ## 2. Top ten movies at the box office
 <p>Let's started by exploring the data. We will check which are the 10 Disney movies that have earned the most at the box office. We can do this by sorting movies by their inflation-adjusted gross (we will call it adjusted gross from this point onward). </p>
 
@@ -29,6 +31,7 @@ inflation_adjusted_gross_desc = gross.sort_values(by='inflation_adjusted_gross',
 # Display the top 10 movies 
 inflation_adjusted_gross_desc.head(10)
 ```
+<img width="651" alt="Screen Shot 2023-04-08 at 21 37 39" src="https://user-images.githubusercontent.com/86967515/230751311-ace84bbf-7ad8-4c92-84d9-b2214e392b1c.png">
 
 ## 3. Movie genre trend
 <p>From the top 10 movies above, it seems that some genres are more popular than others. So, we will check which genres are growing stronger in popularity. To do this, we will group movies by genre and then by year to see the adjusted gross of each genre in each year.</p>
@@ -46,6 +49,7 @@ genre_yearly = group.reset_index()
 # Inspect genre_yearly 
 genre_yearly.head(10)
 ```
+<img width="651" alt="Screen Shot 2023-04-08 at 21 38 05" src="https://user-images.githubusercontent.com/86967515/230751316-b684f41c-7ab6-474c-b6b2-c67ceaf1bee3.png">
 
 ## 4. Visualize the genre popularity trend
 <p>We will make a plot out of these means of groups to better see how box office revenues have changed over time.</p>
@@ -57,6 +61,7 @@ import seaborn as sns
 # Plot the data  
 sns.relplot(x='release_year', y='inflation_adjusted_gross', kind='line', hue='genre', data=genre_yearly)
 ```
+<img width="539" alt="Screen Shot 2023-04-08 at 21 38 23" src="https://user-images.githubusercontent.com/86967515/230751324-e1fe9005-e2f9-4c7e-b78a-930a81b516f8.png">
 
 ## 5. Data transformation
 <p>The line plot supports our belief that some genres are growing faster in popularity than others. For Disney movies, Action and Adventure genres are growing the fastest. Next, we will build a linear regression model to understand the relationship between genre and box office gross. </p>
@@ -92,6 +97,7 @@ adventure = regr.coef_[[0]][0]
 # Inspect the estimated intercept and coefficient values 
 print((action, adventure))
 ```
+<img width="349" alt="Screen Shot 2023-04-08 at 21 39 25" src="https://user-images.githubusercontent.com/86967515/230751327-059c5fd0-7f15-46d1-9916-77757f920387.png">
 
 ## 7. Confidence intervals for regression parameters  (i)
 <p>Next, we will compute 95% confidence intervals for the intercept and coefficients. The 95% confidence intervals for the intercept  <b><i>a</i></b> and coefficient <b><i>b<sub>i</sub></i></b> means that the intervals have a probability of 95% to contain the true value <b><i>a</i></b> and coefficient <b><i>b<sub>i</sub></i></b> respectively. If there is a significant relationship between a given genre and the adjusted gross, the confidence interval of its coefficient should exclude 0.      </p>
@@ -148,6 +154,7 @@ confidence_interval_adventure = np.percentile(bs_adventure_reps, [2.5,97.5])
 print(confidence_interval_action)
 print(confidence_interval_adventure)
 ```
+<img width="277" alt="Screen Shot 2023-04-08 at 21 39 45" src="https://user-images.githubusercontent.com/86967515/230751328-5f6f1279-5f37-41ab-a81c-de3a26401f44.png">
 
 ## 10. Should Disney make more action and adventure movies?
 <p>The confidence intervals from the bootstrap method for the intercept and coefficient do not contain the value zero, as we have already seen that lower and upper bounds of both confidence intervals are positive. These tell us that it is likely that the adjusted gross is significantly correlated with the action and adventure genres. </p>
